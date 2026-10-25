@@ -21,7 +21,6 @@ export interface CollectionItem {
   bgDark: string;
   vignette: string;
   cta: string;
-  trailerUrl: string;
   chapters: { n: string; title: string; text: string }[];
   lore: { title: string; detail: string }[];
 }
@@ -45,7 +44,6 @@ const COLLECTIONS: CollectionItem[] = [
     bgDark: '#03141f',
     vignette: 'linear-gradient(to right, rgba(3,20,31,0.85) 0%, rgba(3,20,31,0.42) 28%, transparent 54%), linear-gradient(180deg, rgba(3,20,31,0.65) 0%, transparent 16%, transparent 76%, rgba(3,20,31,0.92) 100%)',
     cta: 'Voyage Beyond Reef ··',
-    trailerUrl: 'https://www.youtube-nocookie.com/embed/LKFuXETZUsI',
     chapters: [
       { n: '01', title: 'The Call of the Sea', text: 'The crystal ocean parts to welcome young Moana, placing the glowing jade Heart of Te Fiti into her hands.' },
       { n: '02', title: 'Master Wayfinder', text: 'Crossing the vast barrier reef with demigod Maui, navigating ancient star paths across the Pacific.' },
@@ -74,7 +72,6 @@ const COLLECTIONS: CollectionItem[] = [
     bgDark: '#06050a',
     vignette: 'linear-gradient(to right, rgba(6,5,10,0.85) 0%, rgba(6,5,10,0.45) 24%, transparent 48%), linear-gradient(180deg, rgba(6,5,10,0.65) 0%, transparent 16%, transparent 76%, rgba(6,5,10,0.92) 100%)',
     cta: 'Enter Westeros ··',
-    trailerUrl: 'https://www.youtube-nocookie.com/embed/KPLWWIOCOOQ',
     chapters: [
       { n: '01', title: 'Winter is Coming', text: 'The ancient Wall guards the realms of men as whispers of the Night King grow louder.' },
       { n: '02', title: 'The Iron Throne', text: 'Eight seasons. 73 episodes. The legendary saga of conquest, honor, and betrayal.' },
@@ -103,7 +100,6 @@ const COLLECTIONS: CollectionItem[] = [
     bgDark: '#040810',
     vignette: 'linear-gradient(to right, rgba(4,8,16,0.85) 0%, rgba(4,8,16,0.42) 24%, transparent 48%), linear-gradient(180deg, rgba(4,8,16,0.65) 0%, transparent 16%, transparent 76%, rgba(4,8,16,0.92) 100%)',
     cta: 'Unleash Titan ··',
-    trailerUrl: 'https://www.youtube-nocookie.com/embed/odM92ap8_c0',
     chapters: [
       { n: '01', title: 'Sub-Surface Alpha', text: 'Dormant for eons beneath the Pacific trenches, the ultimate apex guardian awakens.' },
       { n: '02', title: 'Atomic Breath', text: 'Concentrated thermonuclear energy lights up stormy skies, vanquishing extraterrestrial titans.' },
@@ -132,7 +128,6 @@ const COLLECTIONS: CollectionItem[] = [
     bgDark: '#07120a',
     vignette: 'linear-gradient(to right, rgba(7,18,10,0.85) 0%, rgba(7,18,10,0.42) 24%, transparent 48%), linear-gradient(180deg, rgba(7,18,10,0.65) 0%, transparent 16%, transparent 76%, rgba(7,18,10,0.92) 100%)',
     cta: 'Explore Epoch ··',
-    trailerUrl: 'https://www.youtube-nocookie.com/embed/2e-eXJ6HgkQ',
     chapters: [
       { n: '01', title: 'Cretaceous Forest', text: 'Lush prehistoric ferns and towering conifers shelter colossal herbivore migrations.' },
       { n: '02', title: 'The Apex Hunt', text: 'Tyrannosaur packs dominate primeval riverbeds in the unforgiving struggle for survival.' },
@@ -150,7 +145,6 @@ export default function Hero() {
   const [loadedCount, setLoadedCount] = useState<number>(0);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
-  const [showTrailer, setShowTrailer] = useState<boolean>(false);
   const [showLore, setShowLore] = useState<boolean>(false);
   const [currentFrameDisplay, setCurrentFrameDisplay] = useState<number>(90);
 
@@ -779,39 +773,7 @@ export default function Hero() {
             {active.cta}
           </button>
 
-          <button
-            onClick={() => setShowTrailer(true)}
-            style={{
-              fontFamily: 'system-ui, -apple-system, sans-serif',
-              fontSize: '0.48rem',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              padding: '0.58rem 1.15rem',
-              borderRadius: '6px',
-              border: '1px solid rgba(255,255,255,0.22)',
-              background: 'rgba(10, 16, 26, 0.45)',
-              backdropFilter: 'blur(14px)',
-              color: '#ffffff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              transition: 'border-color 0.2s, background 0.2s, transform 0.2s',
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = active.primaryColor;
-              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)';
-              (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.22)';
-              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(10, 16, 26, 0.45)';
-              (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
-            }}
-          >
-            <span style={{ color: active.primaryColor, fontSize: '0.65rem' }}>▶</span>
-            <span>Watch Trailer</span>
-          </button>
+
         </div>
 
         {/* Interactive Mouse Guide Hint */}
@@ -841,48 +803,7 @@ export default function Hero() {
           zIndex: 15,
         }}
       >
-        {/* Play trailer button */}
-        <div
-          onClick={() => setShowTrailer(true)}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.65rem',
-            paddingRight: 'clamp(1rem, 2.2vw, 2rem)',
-            borderRight: '1px solid rgba(255,255,255,0.08)',
-            flexShrink: 0,
-            cursor: 'pointer',
-          }}
-        >
-          <div
-            style={{
-              width: '30px',
-              height: '30px',
-              borderRadius: '50%',
-              border: `1px solid ${active.primaryColor}`,
-              background: active.badgeBg,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: active.primaryColor,
-              fontSize: '0.65rem',
-              boxShadow: `0 0 12px ${active.accentGlow}`,
-            }}
-          >
-            ▶
-          </div>
-          <span
-            style={{
-              fontFamily: 'monospace',
-              fontSize: '0.45rem',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.8)',
-            }}
-          >
-            Play Trailer
-          </span>
-        </div>
+
 
         {/* Chapter Story Highlights */}
         {active.chapters.map((item, i) => (
@@ -1006,69 +927,7 @@ export default function Hero() {
         </div>
       </footer>
 
-      {/* ── OFFICIAL TRAILER MODAL ── */}
-      {showTrailer && (
-        <div
-          onClick={() => setShowTrailer(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0,0,0,0.85)',
-            backdropFilter: 'blur(20px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 100,
-            padding: '2rem',
-          }}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '920px',
-              aspectRatio: '16/9',
-              background: '#000',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: `0 0 60px ${active.accentGlow}`,
-              border: `1px solid ${active.primaryColor}`,
-            }}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setShowTrailer(false)}
-              style={{
-                position: 'absolute',
-                top: '12px',
-                right: '12px',
-                zIndex: 10,
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: 'rgba(0,0,0,0.7)',
-                color: '#fff',
-                border: '1px solid rgba(255,255,255,0.2)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1rem',
-              }}
-            >
-              ✕
-            </button>
-            <iframe
-              src={`${active.trailerUrl}?autoplay=1`}
-              title={`${active.name} Trailer`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{ width: '100%', height: '100%', border: 'none' }}
-            />
-          </div>
-        </div>
-      )}
+
 
       {/* ── EXPANDED LORE & STORY MODAL ── */}
       {showLore && (
@@ -1171,10 +1030,7 @@ export default function Hero() {
 
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem' }}>
               <button
-                onClick={() => {
-                  setShowLore(false);
-                  setShowTrailer(true);
-                }}
+                onClick={() => setShowLore(false)}
                 style={{
                   fontFamily: 'monospace',
                   fontSize: '0.5rem',
@@ -1189,7 +1045,7 @@ export default function Hero() {
                   cursor: 'pointer',
                 }}
               >
-                Watch Trailer ▶
+                Close Archives ✕
               </button>
             </div>
           </div>
